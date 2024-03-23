@@ -1,26 +1,18 @@
-import { useEffect, useState } from 'react';
-import { IMeal } from '../../../types/define-type';
-import Meal from '../../../components/Meal';
+import { useEffect } from 'react'
+import Meal from '../../../components/Meal'
+import { fetchRandomMeal } from '../../../redux/reducers/mealReducer'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 
 const RandomMeal = () => {
-
-    const [randomMeal, setRandomMeal] = useState<IMeal | undefined>();
+    const dispatch = useAppDispatch();
+    const randomMeal = useAppSelector(state => state.meal.randomMeal);
+    const favMeals = useAppSelector(state => state.meal.favMeals);
 
     useEffect(() => {
-        const getRandomMeal = async () => {
-            const res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-            const data = await res.json();
-            const randomMeal = data.meals[0];
+        dispatch(fetchRandomMeal());
 
-            setRandomMeal({
-                idMeal: randomMeal.idMeal,
-                strMeal: randomMeal.strMeal,
-                strMealThumb: randomMeal.strMealThumb
-            });
-        };
 
-        getRandomMeal();
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
@@ -28,6 +20,7 @@ const RandomMeal = () => {
                 <Meal
                     meal={randomMeal}
                     isRandom={!!randomMeal}
+                    isFav={!!favMeals.find(fav => fav.idMeal === randomMeal.idMeal)}
                 />
             }
         </>
