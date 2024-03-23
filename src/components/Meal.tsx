@@ -1,18 +1,33 @@
 import { FiHeart } from "react-icons/fi";
 import { IMeal } from "../types/define-type";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
+import { mealActions } from "../redux/reducers/mealReducer";
+import { MouseEvent } from "react";
 
 interface MealProps {
     meal: IMeal;
     isFav?: boolean;
-    onChangeFav?: (isFav: boolean) => void;
     isRandom?: boolean;
 }
 
-const Meal = ({ meal, isFav, onChangeFav, isRandom }: MealProps) => {
+const Meal = ({ meal, isFav, isRandom }: MealProps) => {
+    const dispatch = useAppDispatch();
+
+    const handleButtonFav = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (!isFav) {
+            dispatch(mealActions.addFavMeal(meal));
+        } else {
+            dispatch(mealActions.removeFavMeal(meal));
+        }
+
+    }
 
     return (
-        <Link to={`/meal/${meal.idMeal}`}>
+        <Link to={`/meal/${meal.idMeal}`} >
             <div className="meal shadow-xl rounded-lg cursor-pointer">
                 <div className="meal-header relative">
                     {
@@ -64,8 +79,10 @@ const Meal = ({ meal, isFav, onChangeFav, isRandom }: MealProps) => {
                     <span className="text-lg font-medium">
                         {meal.strMeal || ''}
                     </span>
-                    {onChangeFav &&
-                        <button className="bg-slate-100" onClick={() => { onChangeFav(!isFav) }}>
+                    {
+                        <button className="bg-slate-100" onClick={(e) => {
+                            handleButtonFav(e);
+                        }}>
                             {!isFav ?
                                 <FiHeart size={20} color="#808080" fill="#808080" /> :
                                 <FiHeart size={20} color="#ff7f11" fill="#ff7f11" />

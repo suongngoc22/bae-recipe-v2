@@ -1,28 +1,18 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { IMeal } from "../../types/define-type";
+import { useEffect } from "react"
 import Header from "../../components/Header";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchMealDetail } from "../../redux/reducers/mealReducer";
 
 const MealDetail = () => {
     const { id } = useParams();
-    const [meal, setMeal] = useState<IMeal | null>(null);
-    const [loading, setLoading] = useState(false);
+    const meal = useAppSelector(state => state.meal.mealDetail);
+    const isLoading = useAppSelector(state => state.meal.isLoading);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const getMealById = async (idMeal: string) => {
-            const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
-            const data = await res.json();
-            const meal = data.meals[0];
-
-            setMeal({
-                ...meal,
-                ingredients: getIngredients(meal)
-            });
-            setLoading(false);
-        }
         if (id) {
-            setLoading(true);
-            getMealById(id);
+            dispatch(fetchMealDetail(id));
         }
     }, [id]);
 
@@ -46,7 +36,7 @@ const MealDetail = () => {
         <>
             <Header />
             {
-                loading ? <div>Loading</div> :
+                isLoading ? <div>Loading</div> :
                     meal ?
                         <div className="px-8 py-6">
                             <h1 className="text-lg font-medium text-center pb-4">
@@ -59,9 +49,9 @@ const MealDetail = () => {
                                     className="rounded-xl"
                                 />
                                 <p className="whitespace-pre-wrap">{meal.strInstructions}</p>
-                                {meal.ingredients?.length &&
+                                {getIngredients(meal)?.length &&
                                     <ul>
-                                        {meal.ingredients?.map((ingredient) => (
+                                        {getIngredients(meal).map((ingredient) => (
                                             <li>{ingredient}</li>
                                         ))}
                                     </ul>

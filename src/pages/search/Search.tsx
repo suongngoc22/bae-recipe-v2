@@ -1,44 +1,28 @@
 import { ChangeEvent, useState } from "react"
 import { FiChevronLeft, FiSearch } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
-import { IMeal } from "../../types/define-type"
 import Meal from "../../components/Meal"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchMealBySearch } from "../../redux/reducers/mealReducer"
 
 const Search = () => {
-    const [meals, setMeals] = useState<IMeal[]>([]);
     const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
     const navigate = useNavigate();
-
-    const getMealBySearch = async (term: string) => {
-        const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + term);
-        const data = await res.json();
-        const meals = data.meals;
-
-        return meals;
-    }
+    const searchMeals = useAppSelector(state => state.meal.searchMeals);
+    const dispatch = useAppDispatch();
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         clearTimeout(timer);
         console.log('clear nè');
 
-
         const searchTerm = e.target.value.trim();
 
         if (searchTerm !== '') {
             const timeoutId = setTimeout(async () => {
-
-                console.log(searchTerm);
-                const mealsData = await getMealBySearch(searchTerm);
-                if (mealsData && mealsData.length) {
-                    if (mealsData.length > 0) {
-                        setMeals(mealsData);
-                    }
-                }
+                dispatch(fetchMealBySearch(searchTerm));
 
             }, 500);
             setTimer(timeoutId);
-        } else {
-            setMeals([]);
         }
     }
 
@@ -65,7 +49,7 @@ const Search = () => {
             </div>
             <div className="flex flex-col gap-6">
                 {
-                    meals && meals.map((meal) => {
+                    searchMeals && searchMeals.map((meal) => {
                         return <Meal meal={meal} />
                     })
                 }
