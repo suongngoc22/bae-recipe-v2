@@ -39,6 +39,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                             top-3
                             -left-3
                             z-10
+                            shadow-xl
                             
                             before:absolute
                             before:bottom-0
@@ -71,6 +72,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
 
                     <img
                         className="rounded-t-lg"
+                        // loading="lazy"
                         src={meal.strMealThumb}
                         alt={meal.strMeal}
                     />
