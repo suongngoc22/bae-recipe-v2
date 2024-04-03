@@ -1,7 +1,16 @@
+import { MouseEventHandler, ReactNode } from "react";
 
-const Button = () => {
+interface ButtonProps {
+    icon: ReactNode;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    className?: string;
+}
+
+const Button = ({ icon, onClick, className }: ButtonProps) => {
     return (
-        <div>Button</div>
+        <button onClick={onClick} className={className}>
+            {icon}
+        </button>
     )
 }
 

@@ -10,10 +10,14 @@ export default {
         'pacifico': ['Pacifico', 'cursive'],
       },
       colors: {
-        primary: '#ff7f11',
-        grey: '#808080'
+        primary: '#ffa726',
+        grey: '#808080',
+        lightgray: '#56473F'
+      },
+      boxShadow: {
+        'btnShadow': '0px 5px 35px 5px',
       }
-      
+
     },
   },
   plugins: [],
