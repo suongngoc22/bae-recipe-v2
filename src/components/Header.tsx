@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '/bae-recipe-logo.png'
 import { FiMenu, FiSearch } from "react-icons/fi"

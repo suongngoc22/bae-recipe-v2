@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import FavMealList from "../../components/FavMealList"
 import Header from "../../components/Header"
 import RandomMeal from "./components/RandomMeal"

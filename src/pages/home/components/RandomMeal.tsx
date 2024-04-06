@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Meal from '../../../components/Meal'
 import { fetchRandomMeal } from '../../../redux/reducers/mealReducer'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'

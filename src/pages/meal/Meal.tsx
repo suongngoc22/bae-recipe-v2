@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { fetchMealDetail, mealActions } from "../../redux/reducers/mealReducer"
 import Button from "../../components/Button"

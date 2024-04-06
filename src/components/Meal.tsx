@@ -3,7 +3,7 @@ import { IMeal } from "../types/define-type";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { mealActions } from "../redux/reducers/mealReducer";
-import { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 
 interface MealProps {
     meal: IMeal;
