@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { FiChevronLeft, FiSearch } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
 import Meal from "../../components/Meal"

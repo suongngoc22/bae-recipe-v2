@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from "react-router-dom"
 import { IMeal } from "../types/define-type"
 
