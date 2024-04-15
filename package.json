@@ -2,7 +2,6 @@
   "name": "bae-recipe-v2",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://suongngoc22.github.io/bae-recipe-v2/",
   "type": "module",
   "scripts": {
     "dev": "vite",
