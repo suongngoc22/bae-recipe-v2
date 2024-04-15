@@ -82,7 +82,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                         {meal.strMeal || ''}
                     </span>
                     {
-                        <button className="bg-slate-100" onClick={(e) => {
+                        <button className="" onClick={(e) => {
                             handleButtonFav(e);
                         }}>
                             {!isFav ?

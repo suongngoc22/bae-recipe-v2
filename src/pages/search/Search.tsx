@@ -9,6 +9,7 @@ const Search = () => {
     const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
     const navigate = useNavigate();
     const searchMeals = useAppSelector(state => state.meal.searchMeals);
+    const favMeals = useAppSelector(state => state.meal.favMeals);
     const dispatch = useAppDispatch();
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,11 +29,11 @@ const Search = () => {
 
     return (
         <div className="px-8 py-6">
-            <div className="flex justify-between items-center pb-8">
+            <div className="flex justify-between items-center pb-8 gap-3">
                 <button onClick={() => navigate(-1)} >
                     <FiChevronLeft size={24} />
                 </button>
-                <div className="w-64 flex justify-start items-center gap-2 py-2 pl-3 pr-5 rounded-lg bg-[#f6f6f6]">
+                <div className="flex justify-start items-center w-full gap-2 py-2 pl-3 pr-5 rounded-lg bg-[#f6f6f6]">
                     <FiSearch size={16} />
                     <input
                         type="text"
@@ -50,7 +51,8 @@ const Search = () => {
             <div className="flex flex-col gap-6">
                 {
                     searchMeals && searchMeals.map((meal) => {
-                        return <Meal meal={meal} />
+                        return <Meal meal={meal} isFav={!!favMeals.find(fav => fav.idMeal === meal.idMeal)}
+                        />
                     })
                 }
             </div>
