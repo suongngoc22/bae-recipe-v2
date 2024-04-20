@@ -5,6 +5,7 @@ import { fetchMealDetail, mealActions } from "../../redux/reducers/mealReducer"
 import Button from "../../components/Button"
 import { FiBookmark, FiChevronLeft } from "react-icons/fi"
 import SubTitle from "./components/SubTitle"
+import MealSkeleton from "./components/MealSkeleton"
 
 const MealDetail = () => {
     const { id } = useParams();
@@ -47,7 +48,7 @@ const MealDetail = () => {
 
     return (
         <>
-            {isLoading ? <div>Loading</div> :
+            {isLoading ? <MealSkeleton /> :
                 meal ?
                     <div className="">
                         <div className="relative">
