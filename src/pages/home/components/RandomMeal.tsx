@@ -17,18 +17,19 @@ const RandomMeal = () => {
     }, [dispatch]);
 
     return (
-        <>
-            {randomMeal &&
-                <>
-                    <Button icon={<FaShuffle />} />
-                    <Meal
-                        meal={randomMeal}
-                        isRandom={!!randomMeal}
-                        isFav={!!favMeals.find(fav => fav.idMeal === randomMeal.idMeal)}
-                    />
-                </>
-            }
-        </>
+        randomMeal &&
+        <div className='relative'>
+            <Button
+                icon={<FaShuffle size={18} color="white" />}
+                onClick={() => dispatch(fetchRandomMeal())}
+                className="absolute z-10 top-3 right-2 w-8 h-8 bg-primary flex items-center justify-center rounded-full shadow-xl"
+            />
+            <Meal
+                meal={randomMeal}
+                isRandom={!!randomMeal}
+                isFav={!!favMeals.find(fav => fav.idMeal === randomMeal.idMeal)}
+            />
+        </div>
     );
 }
 
