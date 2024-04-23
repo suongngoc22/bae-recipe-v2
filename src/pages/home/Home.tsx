@@ -19,10 +19,9 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="pt-8">
+        <div className="relative">
             <Header />
             <div className="px-8">
-                <FavMealList />
                 <RandomMeal />
             </div>
             <BottomNavigate />

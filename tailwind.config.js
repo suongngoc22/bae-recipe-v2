@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'pacifico': ['Pacifico', 'cursive'],
+        'balsamiq': ['Balsamiq Sans', 'sans-serif']
       },
       colors: {
         primary: '#ffa726',
