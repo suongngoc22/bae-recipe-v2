@@ -69,10 +69,8 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                             </div>
                         </div>
                     }
-
                     <img
-                        className="rounded-t-lg"
-                        // loading="lazy"
+                        className="rounded-t-lg w-full h-[366px]"
                         src={meal.strMealThumb}
                         alt={meal.strMeal}
                     />
