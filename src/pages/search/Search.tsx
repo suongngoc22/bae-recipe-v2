@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Meal from "../../components/Meal"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { fetchMealBySearch } from "../../redux/reducers/mealReducer"
+import BottomNavigate from "../../components/BottomNavigate"
 
 const Search = () => {
     const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
@@ -28,36 +29,39 @@ const Search = () => {
     }
 
     return (
-        <div className="px-8 py-6">
-            <div className="flex justify-between items-center pb-8 gap-3">
-                <button onClick={() => navigate(-1)} >
-                    <FiChevronLeft size={24} />
-                </button>
-                <div className="flex justify-start items-center w-full gap-2 py-2 pl-3 pr-5 rounded-lg bg-[#f6f6f6]">
-                    <FiSearch size={16} />
-                    <input
-                        type="text"
-                        placeholder="Pizza"
-                        className="w-full bg-transparent outline-none border-none"
-                        onChange={(e) => { handleSearch(e) }}
-                    />
-                </div>
-                <span
-                    className="text-primary font-medium cursor-pointer"
-                >
-                    Search
-                </span>
-            </div>
-            <div className="flex flex-col gap-6">
-                {
-                    searchMeals && searchMeals.map((meal) => {
-                        return <Meal meal={meal} isFav={!!favMeals.find(fav => fav.idMeal === meal.idMeal)}
+        <>
+            <div className="px-8 py-6">
+                <div className="flex justify-between items-center pb-8 gap-3">
+                    <button onClick={() => navigate(-1)} >
+                        <FiChevronLeft size={24} />
+                    </button>
+                    <div className="flex justify-start items-center w-full gap-2 py-2 pl-3 pr-5 rounded-lg bg-[#f6f6f6]">
+                        <FiSearch size={16} />
+                        <input
+                            type="text"
+                            placeholder="Pizza"
+                            className="w-full bg-transparent outline-none border-none"
+                            onChange={(e) => { handleSearch(e) }}
                         />
-                    })
-                }
-            </div>
+                    </div>
+                    <span
+                        className="text-primary font-medium cursor-pointer"
+                    >
+                        Search
+                    </span>
+                </div>
+                <div className="flex flex-col gap-6">
+                    {
+                        searchMeals && searchMeals.map((meal) => {
+                            return <Meal meal={meal} isFav={!!favMeals.find(fav => fav.idMeal === meal.idMeal)}
+                            />
+                        })
+                    }
+                </div>
 
-        </div>
+            </div>
+            <BottomNavigate />
+        </>
     )
 }
 

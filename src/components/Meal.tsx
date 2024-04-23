@@ -2,8 +2,10 @@ import { FiHeart } from "react-icons/fi";
 import { IMeal } from "../types/define-type";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
-import { mealActions } from "../redux/reducers/mealReducer";
+import { fetchRandomMeal, mealActions } from "../redux/reducers/mealReducer";
 import { MouseEvent } from "react";
+import Button from "./Button";
+import { FaShuffle } from "react-icons/fa6";
 
 interface MealProps {
     meal: IMeal;
@@ -26,13 +28,20 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
 
     }
 
+    const handleButtonRandom = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        dispatch(fetchRandomMeal());
+    }
+
     return (
         <Link to={`/meal/${meal.idMeal}`} >
             <div className="meal shadow-xl rounded-lg cursor-pointer">
                 <div className="meal-header relative">
                     {
-                        isRandom && <div
-                            className="
+                        isRandom &&
+                        <>
+                            <div
+                                className="
                             absolute
                             h-10
                             w-30
@@ -53,7 +62,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                             before:border-l-transparent
 
                         ">
-                            <div className="
+                                <div className="
                             absolute
                             bg-primary
                             py-1 
@@ -65,9 +74,16 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                             rounded-bl-none
                             
                         ">
-                                Random Recipe
+                                    Random Recipe
+                                </div>
                             </div>
-                        </div>
+                            <Button
+                                icon={<FaShuffle size={18} color="white" />}
+                                onClick={(e) => handleButtonRandom(e)}
+                                className="absolute z-10 top-3 right-2 w-8 h-8 bg-primary flex items-center justify-center rounded-full shadow-xl"
+                            />
+                        </>
+
                     }
                     <img
                         className="rounded-t-lg w-full h-[366px]"
@@ -76,7 +92,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                     />
                 </div>
                 <div className="meal-body flex justify-between items-center p-4">
-                    <span className="text-lg font-medium">
+                    <span className="text-md font-medium">
                         {meal.strMeal || ''}
                     </span>
                     {

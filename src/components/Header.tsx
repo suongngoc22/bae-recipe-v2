@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import Logo from '/bae-recipe-logo.png'
-import { FiMenu, FiSearch } from "react-icons/fi"
+import { FiSearch } from "react-icons/fi"
 
 const Header = () => {
   return (
-    <header className="py-4 px-8 flex justify-between items-center bg-blue-200">
-      <FiMenu size={20} />
+    <div className='flex justify-between px-8'>
       <div className='flex justify-center items-center gap-2'>
         <img
           src={Logo}
@@ -16,10 +15,10 @@ const Header = () => {
       </div>
       <Link to='/search'>
         <FiSearch
-          size={20}
+          size={22}
         />
       </Link>
-    </header>
+    </div>
   )
 }
 
