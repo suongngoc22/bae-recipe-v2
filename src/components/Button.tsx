@@ -1,15 +1,15 @@
 import { MouseEventHandler, ReactNode } from "react";
 
 interface ButtonProps {
-    icon: ReactNode;
+    children: ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     className?: string;
 }
 
-const Button = ({ icon, onClick, className }: ButtonProps) => {
+const Button = ({ children, onClick, className }: ButtonProps) => {
     return (
         <button onClick={onClick} className={className}>
-            {icon}
+            {children}
         </button>
     )
 }

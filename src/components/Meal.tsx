@@ -78,7 +78,7 @@ const Meal = ({ meal, isFav, isRandom }: MealProps) => {
                                 </div>
                             </div>
                             <Button
-                                icon={<FaShuffle size={18} color="white" />}
+                                children={<FaShuffle size={18} color="white" />}
                                 onClick={(e) => handleButtonRandom(e)}
                                 className="absolute z-10 top-3 right-2 w-8 h-8 bg-primary flex items-center justify-center rounded-full shadow-xl"
                             />

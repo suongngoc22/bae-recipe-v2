@@ -57,12 +57,12 @@ const MealDetail = () => {
                             className="w-full max-h-52 object-cover object-center z-10"
                         />
                         <Button
-                            icon={<FiChevronLeft size={20} color="white" />}
+                            children={<FiChevronLeft size={20} color="white" />}
                             onClick={() => navigate(-1)}
                             className="absolute top-6 left-4 w-8 h-8 bg-primary flex items-center justify-center rounded-full shadow-xl"
                         />
                         <Button
-                            icon={
+                            children={
                                 <FiBookmark
                                     size={26}
                                     stroke="white"

@@ -5,7 +5,7 @@ const FavMealList = () => {
   const favMeals = useAppSelector(state => state.meal.favMeals);
 
   return (
-    <ul className="flex overflow-y-auto gap-3 my-4 pb-3">
+    <ul className="flex flex-col gap-6 py-3">
       {
         favMeals.map((favMeal, index) => {
           return (
