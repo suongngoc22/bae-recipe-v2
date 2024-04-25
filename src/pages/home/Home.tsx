@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import FavMealList from "../../components/FavMealList"
+import { useEffect } from "react"
 import Header from "../../components/Header"
 import RandomMeal from "./components/RandomMeal"
-import { useAppDispatch } from "../../redux/hooks";
-import { mealActions } from "../../redux/reducers/mealReducer";
+import { useAppDispatch } from "../../redux/hooks"
+import { mealActions } from "../../redux/reducers/mealReducer"
+import BottomNavigate from "../../components/BottomNavigate"
 
 const Home = () => {
     const dispatch = useAppDispatch();
@@ -18,12 +18,12 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className="relative">
             <Header />
             <div className="px-8">
-                <FavMealList />
                 <RandomMeal />
             </div>
+            <BottomNavigate />
         </div>
     )
 }
