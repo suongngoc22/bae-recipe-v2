@@ -24,3 +24,4 @@ const auth = getAuth(app);
 export { app, auth };
 
 // https://www.youtube.com/watch?v=WpIDez53SK4
+// https://youtu.be/S0ehjKlPcLA?si=DrpsGgE3sLm1gWZp

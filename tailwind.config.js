@@ -6,7 +6,11 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'onboarding': "url('/bg-onboarding.png')",
+      },
       fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
         'pacifico': ['Pacifico', 'cursive'],
         'balsamiq': ['Balsamiq Sans', 'sans-serif']
       },
