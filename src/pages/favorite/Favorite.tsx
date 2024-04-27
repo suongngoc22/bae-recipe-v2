@@ -8,8 +8,8 @@ const Favorite = () => {
             <div className='p-6'>
                 <h1 className='text-2xl font-bold leading-[60px]'>Saved recipes</h1>
                 <div className='flex justify-between py-3'>
-                    <ButtonText text='Video' type='primary' />
-                    <ButtonText text='Recipe' type='secondary' />
+                    <ButtonText text='Video' style={2} type='primary' />
+                    <ButtonText text='Recipe' style={2} type='secondary' />
                 </div>
                 <div>
                     <FavMealList />
