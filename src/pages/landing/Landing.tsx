@@ -12,7 +12,7 @@ const Landing = () => {
                 <p className="text-[18px] font-normal leading-normal">Find best recipes for cooking</p>
                 <ButtonText
                     text="Start cooking"
-                    style={1}
+                    style="large"
                     type={"primary"}
                     icon={<img src={ArrowRightIcon} className="whiteSvg" />}
                     onClick={() => navigate('/home')}

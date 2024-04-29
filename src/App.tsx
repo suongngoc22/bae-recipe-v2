@@ -5,6 +5,7 @@ import Search from './pages/search/Search'
 import MealDetail from './pages/meal/Meal'
 import Favorite from './pages/favorite/Favorite'
 import Landing from './pages/landing/Landing'
+import Profile from './pages/profile/Profile'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Route path='/home' element={<Home />} />
       <Route path='/search' element={<Search />} />
       <Route path='/meal/:id' element={<MealDetail />} />
+      <Route path='/profile' element={<Profile />} />
       <Route path='/profile/favorites' element={<Favorite />} />
     </Routes>
   )
