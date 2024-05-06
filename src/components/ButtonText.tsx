@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode } from "react";
 
 interface ButtonTextProps {
     text: string;
-    onClick?: MouseEventHandler<HTMLButtonElement>; //chõ này moussê event
+    onClick?: MouseEventHandler<HTMLButtonElement>;
     style: 'small' | 'large';
     type: 'primary' | 'secondary' | 'text';
     icon?: ReactNode;
@@ -17,7 +17,7 @@ const ButtonText = ({ text, onClick, style, type, icon, className }: ButtonTextP
             if (type === 'primary') {
                 btnStyles = 'min-w-[161px] bg-primary text-white text-base font-semibold px-9 py-4';
             } else if (type === 'secondary') {
-                btnStyles = 'min-w-[161px] border border-primary text-base font-semibold px-9 py-4';
+                btnStyles = 'min-w-[161px] border border-primary text-base font-semibold text-primary px-9 py-4';
             } else {
                 btnStyles = 'min-w-[161px] bg-transparent text-primary text-base font-semibold px-9 py-4';
             }
@@ -39,7 +39,7 @@ const ButtonText = ({ text, onClick, style, type, icon, className }: ButtonTextP
     }
 
     return (
-        <button onClick={onClick} className={`flex justify-center items-center gap-2 rounded-xl ${btnStyles} ${className}`}>
+        <button onClick={onClick} className={`flex justify-center items-center gap-3 rounded-xl ${btnStyles} ${className}`}>
             {text}
             {icon}
         </button>
