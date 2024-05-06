@@ -5,3 +5,8 @@ export interface IMeal {
     strInstructions?: string;
     ingredients?: string[];
 }
+
+export interface ILoginFormValues {
+    email: string;
+    password: string;
+}
