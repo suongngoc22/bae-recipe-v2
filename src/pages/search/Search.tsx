@@ -5,6 +5,7 @@ import Meal from "../../components/Meal"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { fetchMealBySearch } from "../../redux/reducers/mealReducer"
 import BottomNavigate from "../../components/BottomNavigate"
+import { bottomNavigatorHeight } from "../../common/define"
 
 const Search = () => {
     const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
@@ -30,7 +31,7 @@ const Search = () => {
 
     return (
         <>
-            <div className="px-8 py-6">
+            <div className="px-8 py-6" style={{ paddingBottom: bottomNavigatorHeight + 20 }}>
                 <div className="flex justify-between items-center pb-8 gap-3">
                     <button onClick={() => navigate(-1)} >
                         <FiChevronLeft size={24} />

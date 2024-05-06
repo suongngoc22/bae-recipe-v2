@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode } from "react";
 
 interface ButtonTextProps {
     text: string;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onClick?: MouseEventHandler<HTMLButtonElement>; //chõ này moussê event
     style: 'small' | 'large';
     type: 'primary' | 'secondary' | 'text';
     icon?: ReactNode;

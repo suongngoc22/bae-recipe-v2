@@ -1,11 +1,24 @@
-import Login from '../login/Login'
+import BottomNavigate from "../../components/BottomNavigate";
+import ButtonText from "../../components/ButtonText"
+import { useAuth } from "../../hooks/useAuth"
 
 const Profile = () => {
-    return (
-        <div >
-            <Login />
+    const { user, signOut } = useAuth();
 
-        </div>
+    return (
+        <>
+            <div>
+                Hello {user?.email} you logged in
+                <ButtonText
+                    text="Log out"
+                    type="secondary"
+                    style="large"
+                    onClick={signOut}
+                />
+            </div>
+
+            <BottomNavigate />
+        </>
     )
 }
 
