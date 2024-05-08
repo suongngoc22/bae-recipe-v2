@@ -7,7 +7,7 @@ import ButtonText from "../../components/ButtonText";
 import { useState } from "react";
 
 const Register = () => {
-    const { user, isLoading } = useAuth();
+    const { isLoading } = useAuth();
     const navigate = useNavigate();
     const [registerData, setRegisterData] = useState({
         displayName: '',
