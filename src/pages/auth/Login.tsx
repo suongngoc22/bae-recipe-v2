@@ -4,6 +4,8 @@ import InputCustom from "../../components/InputCustom"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
 import Loader from "../../components/Loader"
+import { IoClose } from "react-icons/io5"
+import GoogleIcon from '../../assets/Logo-Google.svg'
 
 const Login = () => {
     const { user, isLoading, signIn, signInWithGoogle } = useAuth();
@@ -51,6 +53,11 @@ const Login = () => {
             <Loader loading={isLoading} />
             <div className="min-h-screen flex items-end">
                 <div className="w-full px-8 flex flex-col gap-12 my-12">
+                    <IoClose
+                        size={24}
+                        className="absolute top-10 cursor-pointer"
+                        onClick={() => navigate('/home')}
+                    />
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Sign In</h1>
 
                     <div className="flex flex-col gap-4">
@@ -94,9 +101,10 @@ const Login = () => {
                             type="secondary"
                             style="large"
                             onClick={() => onGoogleSignIn()}
+                            icon={<img src={GoogleIcon} className="w-5 h-5" />}
                         />
 
-                        <span className="text-sm text-[#A9A9A9]">Don’t have an account? <Link to={'register'} className="font-semibold text-primary">Sign Up</Link></span>
+                        <span className="text-sm text-[#A9A9A9]">Don’t have an account? <Link to={'/register'} className="font-semibold text-primary">Sign Up</Link></span>
                     </div>
                 </div >
             </div >
