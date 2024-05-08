@@ -24,6 +24,7 @@ const Login = () => {
     }
 
     const handleSignIn = () => {
+        console.log(loginData);
         signIn(loginData);
     }
 
