@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
-import { FiDelete, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 interface InputCustomProps {
-    type: 'email' | 'password' | 'number';
+    type: 'email' | 'password' | 'number' | 'text';
     label: string;
     value: any;
     setValue: (value: any) => void;
