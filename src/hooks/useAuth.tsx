@@ -18,10 +18,15 @@ export const useAuth = () => {
 
     const signIn = async ({ email, password }: ILoginFormValues) => {
         setIsLoading(true);
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        setIsLoading(false);
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            setIsLoading(false);
+            return result;
 
-        return result;
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
     };
 
     const signInWithGoogle = async () => {
