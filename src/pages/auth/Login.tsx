@@ -25,13 +25,10 @@ const Login = () => {
 
     const handleSignIn = () => {
         console.log(loginData);
-        console.log("login binh thuong");
         signIn(loginData);
     }
 
     const onGoogleSignIn = () => {
-        console.log("login gg");
-
         try {
             signInWithGoogle();
 
