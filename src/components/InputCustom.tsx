@@ -11,7 +11,8 @@ const InputCustom = ({ type, label, value, setValue }: InputCustomProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
+        const inputValue = e.target.value;
+        setValue(inputValue);
     }
 
     return (

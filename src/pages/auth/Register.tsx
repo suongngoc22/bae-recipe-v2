@@ -4,29 +4,72 @@ import { useAuth } from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import InputCustom from "../../components/InputCustom";
 import ButtonText from "../../components/ButtonText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Register = () => {
-    const { isLoading } = useAuth();
+    const { isLoading, signUp } = useAuth();
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
     const navigate = useNavigate();
     const [registerData, setRegisterData] = useState({
-        displayName: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
+    const [errorData, setErrorData] = useState({
+        email: '',
+        password: ''
+    })
 
     const onChangeRegisterData = (key: string, value: any) => {
         setRegisterData({
             ...registerData,
             [key]: value
-        })
+        });
+        checkValidate(key, value);
+    }
+
+    const checkValidate = (key: string, value: any) => {
+        const inputValue = value;
+
+        if (key === 'email') {
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputValue);
+            handleErrorData("email", isValidEmail ? "" : "Invalid email address");
+        }
+
+        if (key === 'password') {
+            const isValidPassword = inputValue.length >= 8;
+            handleErrorData("password", isValidPassword ? "" : "Password must be at least 8 characters long");
+        }
+
+        // if (key === 'displayName') {
+        //     const isValidFullname = inputValue.length > 0;
+        //     handleErrorData("displayName", isValidFullname ? "" : "Please enter your fullname");
+        // }
+    }
+
+    const handleErrorData = (key: string, value: any) => {
+        setErrorData({
+            ...errorData,
+            [key]: value
+        });
     }
 
     const handleSignUp = () => {
-        console.log(registerData);
-
+        console.log("giá trị đầy đủ, ko lỗi, ok có thể đăng ký");
+        signUp(registerData);
     }
+
+    useEffect(() => {
+        if (registerData.email && registerData.password) {
+            if (!errorData.email && !errorData.password) {
+                setIsSignUpDisabled(false);
+            } else {
+                setIsSignUpDisabled(true);
+            }
+
+        } else {
+            setIsSignUpDisabled(true);
+        }
+    }, [registerData, errorData]);
 
     return (
         <>
@@ -41,30 +84,42 @@ const Register = () => {
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Create an Account!</h1>
 
                     <div className="flex flex-col gap-4">
-                        <InputCustom
-                            type="text"
-                            label='Full Name'
-                            value={registerData.displayName}
-                            setValue={(value) => onChangeRegisterData("displayName", value)}
-                        />
-                        <InputCustom
-                            type="email"
-                            label='Email'
-                            value={registerData.email}
-                            setValue={(value) => onChangeRegisterData("email", value)}
-                        />
-                        <InputCustom
-                            type="password"
-                            label='Password'
-                            value={registerData.password}
-                            setValue={(value) => onChangeRegisterData("password", value)}
-                        />
-                        <InputCustom
-                            type="password"
-                            label='Confirm Password'
-                            value={registerData.confirmPassword}
-                            setValue={(value) => onChangeRegisterData("confirmPassword", value)}
-                        />
+                        {/* <div>
+                            <InputCustom
+                                type="text"
+                                label='Full Name'
+                                value={registerData.displayName}
+                                setValue={(value) => {
+                                    onChangeRegisterData("displayName", value);
+                                }}
+                            />
+                            <div className="w-full h-3 text-xs mt-1">
+                                {errorData.displayName.length > 0 && <p className="text-red-500">{errorData.displayName}</p>}
+                            </div>
+                        </div> */}
+                        <div>
+                            <InputCustom
+                                type="email"
+                                label='Email Address'
+                                value={registerData.email}
+                                setValue={(value) => onChangeRegisterData("email", value)}
+                            />
+                            <div className="w-full h-3 text-xs mt-1">
+                                {errorData.email.length > 0 && <p className="text-red-500">{errorData.email}</p>}
+                            </div>
+                        </div>
+                        <div>
+                            <InputCustom
+                                type="password"
+                                label='Password'
+                                value={registerData.password}
+                                setValue={(value) => onChangeRegisterData("password", value)}
+                            />
+                            <div className="w-full h-3 text-xs mt-1">
+                                {errorData.password.length > 0
+                                    && <p className="text-red-500">{errorData.password}</p>}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="flex flex-col justify-center text-sm text-center text-[#A9A9A9] max-w-[350px]">
@@ -82,9 +137,10 @@ const Register = () => {
                     <div className="flex flex-col gap-10 text-center">
                         <ButtonText
                             text="Sign Up"
-                            type="secondary"
+                            type={isSignUpDisabled ? "secondary" : "primary"}
                             style="large"
                             onClick={() => handleSignUp()}
+                            isDisabled={isSignUpDisabled}
                         />
                         <span className="text-sm text-[#A9A9A9]">Already have an account? <Link to={'/login'} className="font-semibold text-primary">Sign In</Link></span>
                     </div>

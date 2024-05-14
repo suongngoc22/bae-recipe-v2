@@ -57,7 +57,7 @@ const Login = () => {
                     />
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Sign In</h1>
 
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                         <InputCustom
                             type="email"
                             label='Email'
@@ -70,7 +70,6 @@ const Login = () => {
                             value={loginData.password}
                             setValue={(value) => onChangeLoginData("password", value)}
                         />
-                        <Link to={'password-recovery'} className="text-sm font-semibold text-primary">Forget your password?</Link>
                     </div>
 
                     <div className="flex flex-col justify-center text-sm text-center text-[#A9A9A9] max-w-[350px]">

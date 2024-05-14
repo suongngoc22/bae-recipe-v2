@@ -13,7 +13,7 @@ const Profile = () => {
                     text="Log out"
                     type="secondary"
                     style="large"
-                    onClick={signOut}
+                    onClick={() => signOut()}
                 />
             </div>
 
