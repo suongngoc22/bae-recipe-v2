@@ -7,9 +7,10 @@ interface ButtonTextProps {
     type: 'primary' | 'secondary' | 'text';
     icon?: ReactNode;
     className?: string;
+    isDisabled?: boolean;
 }
 
-const ButtonText = ({ text, onClick, style, type, icon, className }: ButtonTextProps) => {
+const ButtonText = ({ text, onClick, style, type, icon, className, isDisabled }: ButtonTextProps) => {
 
     let btnStyles;
     switch (style) {
@@ -39,7 +40,11 @@ const ButtonText = ({ text, onClick, style, type, icon, className }: ButtonTextP
     }
 
     return (
-        <button onClick={onClick} className={`flex justify-center items-center gap-3 rounded-xl ${btnStyles} ${className}`}>
+        <button
+            onClick={onClick}
+            className={`flex justify-center items-center gap-3 rounded-xl ${btnStyles} ${className}`}
+            disabled={isDisabled}
+        >
             {text}
             {icon}
         </button>

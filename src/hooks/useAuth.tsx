@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
-import { User as FirebaseUser, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { User as FirebaseUser, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { ILoginFormValues } from "../types/define-type";
 
 export const useAuth = () => {
@@ -15,6 +15,21 @@ export const useAuth = () => {
         }
         setIsLoading(false);
     };
+
+    const signUp = async ({ email, password }: ILoginFormValues) => {
+        setIsLoading(true);
+        try {
+            const result = await createUserWithEmailAndPassword(auth, email, password);
+            setIsLoading(false);
+            console.log("đăng ký thành công");
+
+            return result;
+
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
+    }
 
     const signIn = async ({ email, password }: ILoginFormValues) => {
         setIsLoading(true);
@@ -52,5 +67,5 @@ export const useAuth = () => {
         return unsubscribe;
     }, []);
 
-    return { user, isLoading, signIn, signInWithGoogle, signOut }
+    return { user, isLoading, signUp, signIn, signInWithGoogle, signOut }
 }
