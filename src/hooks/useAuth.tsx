@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
 import { User as FirebaseUser, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { ILoginFormValues } from "../types/define-type";
+import { FirebaseError } from "firebase/app";
 
 export const useAuth = () => {
     const [user, setUser] = useState<FirebaseUser | ILoginFormValues>();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<FirebaseError | null>(null);
 
     const handleUser = (user: FirebaseUser | null) => {
         if (user) {
@@ -33,14 +35,16 @@ export const useAuth = () => {
 
     const signIn = async ({ email, password }: ILoginFormValues) => {
         setIsLoading(true);
+        setError(null);
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
+            const user = result.user;
+            handleUser(user);
             setIsLoading(false);
-            return result;
 
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
             setIsLoading(false);
+            setError(error);
         }
     };
 
@@ -58,8 +62,9 @@ export const useAuth = () => {
         }
     };
 
-    const signOut = async () => {
+    const signOut = async (callback: () => void) => {
         await auth.signOut();
+        callback();
     }
 
     useEffect(() => {
@@ -67,5 +72,5 @@ export const useAuth = () => {
         return unsubscribe;
     }, []);
 
-    return { user, isLoading, signUp, signIn, signInWithGoogle, signOut }
+    return { user, isLoading, signUp, signIn, signInWithGoogle, signOut, error }
 }

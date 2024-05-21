@@ -21,12 +21,16 @@ function App() {
       <Route path='/search' element={<Search />} />
       <Route path='/meal/:id' element={<MealDetail />} />
 
-      <Route path='/profile' element={<AuthProtect>
-        <Profile />
-      </AuthProtect>} />
-      <Route path='/profile/favorites' element={<AuthProtect>
-        <Favorite />
-      </AuthProtect>} />
+      <Route path='/profile' element={
+        <AuthProtect>
+          <Profile />
+        </AuthProtect>}
+      />
+      <Route path='/favorites' element={
+        <AuthProtect>
+          <Favorite />
+        </AuthProtect>}
+      />
 
       <Route path='*' element={<>404 not found</>} />
 

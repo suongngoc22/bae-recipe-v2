@@ -9,7 +9,7 @@ const navItems = [
         icon: <FiHome size={22} />
     },
     {
-        url: '/profile/favorites',
+        url: '/favorites',
         icon: <FiBookmark size={22} />
     },
     {

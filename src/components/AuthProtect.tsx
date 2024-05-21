@@ -1,22 +1,15 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import Unauthorized from "./Unauthorized";
 interface AuthProtectProps {
     children: ReactNode;
 }
 
 const AuthProtect = ({ children }: AuthProtectProps) => {
     const { user } = useAuth();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-        }
-    }, [user]);
 
     return (
-        user ? children : <></>
+        user ? children : <Unauthorized />
     )
 }
 
