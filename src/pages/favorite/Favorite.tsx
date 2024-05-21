@@ -6,7 +6,7 @@ const Favorite = () => {
     return (
         <div>
             <div className='p-6'>
-                <h1 className='text-2xl font-bold leading-[60px]'>Saved recipes</h1>
+                <h1 className='heading'>Saved recipes</h1>
                 <div className='flex justify-between py-3'>
                     <ButtonText text='Video' style="small" type='primary' />
                     <ButtonText text='Recipe' style="small" type='secondary' />

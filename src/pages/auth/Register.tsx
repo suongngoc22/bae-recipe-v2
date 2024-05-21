@@ -7,7 +7,7 @@ import ButtonText from "../../components/ButtonText";
 import { useEffect, useState } from "react";
 
 const Register = () => {
-    const { isLoading, signUp } = useAuth();
+    const { isLoading, signUp, user, error, setError } = useAuth();
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
     const navigate = useNavigate();
     const [registerData, setRegisterData] = useState({
@@ -20,6 +20,7 @@ const Register = () => {
     })
 
     const onChangeRegisterData = (key: string, value: any) => {
+        setError(null);
         setRegisterData({
             ...registerData,
             [key]: value
@@ -37,7 +38,15 @@ const Register = () => {
 
         if (key === 'password') {
             const isValidPassword = inputValue.length >= 8;
-            handleErrorData("password", isValidPassword ? "" : "Password must be at least 8 characters long");
+            const isEmptyPassword = inputValue.length <= 0;
+
+            if (isEmptyPassword) {
+                handleErrorData("password", "Please enter your password");
+            } else if (!isValidPassword) {
+                handleErrorData("password", "Password must be at least 8 characters long");
+            } else {
+                handleErrorData("password", "");
+            }
         }
 
         // if (key === 'displayName') {
@@ -70,6 +79,12 @@ const Register = () => {
             setIsSignUpDisabled(true);
         }
     }, [registerData, errorData]);
+
+    useEffect(() => {
+        if (user && !isLoading) {
+            navigate("/profile");
+        }
+    }, [user, isLoading]);
 
     return (
         <>
@@ -120,6 +135,7 @@ const Register = () => {
                                     && <p className="text-red-500">{errorData.password}</p>}
                             </div>
                         </div>
+                        {!!error && <div className="text-xs text-red-500"> {error.message} </div>}
                     </div>
 
                     <div className="flex flex-col justify-center text-sm text-center text-[#A9A9A9] max-w-[350px]">
