@@ -8,7 +8,7 @@ interface InputCustomProps {
     error: string;
 }
 
-const InputCustom = ({ type, label, value, setValue, error }: InputCustomProps) => {
+    const InputCustom = ({ type, label, value, setValue, error }: InputCustomProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

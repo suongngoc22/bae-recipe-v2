@@ -77,7 +77,6 @@ const Register = () => {
                         onClick={() => navigate('/home')}
                     />
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Create an Account!</h1>
-
                     <div className="flex flex-col gap-3">
                         <div>
                             <InputCustom
