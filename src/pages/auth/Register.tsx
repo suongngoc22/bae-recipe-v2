@@ -48,11 +48,6 @@ const Register = () => {
                 handleErrorData("password", "");
             }
         }
-
-        // if (key === 'displayName') {
-        //     const isValidFullname = inputValue.length > 0;
-        //     handleErrorData("displayName", isValidFullname ? "" : "Please enter your fullname");
-        // }
     }
 
     const handleErrorData = (key: string, value: any) => {
@@ -97,31 +92,15 @@ const Register = () => {
                         onClick={() => navigate('/home')}
                     />
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Create an Account!</h1>
-
-                    <div className="flex flex-col gap-4">
-                        {/* <div>
-                            <InputCustom
-                                type="text"
-                                label='Full Name'
-                                value={registerData.displayName}
-                                setValue={(value) => {
-                                    onChangeRegisterData("displayName", value);
-                                }}
-                            />
-                            <div className="w-full h-3 text-xs mt-1">
-                                {errorData.displayName.length > 0 && <p className="text-red-500">{errorData.displayName}</p>}
-                            </div>
-                        </div> */}
+                    <div className="flex flex-col gap-3">
                         <div>
                             <InputCustom
                                 type="email"
                                 label='Email Address'
                                 value={registerData.email}
                                 setValue={(value) => onChangeRegisterData("email", value)}
+                                error={errorData.email}
                             />
-                            <div className="w-full h-3 text-xs mt-1">
-                                {errorData.email.length > 0 && <p className="text-red-500">{errorData.email}</p>}
-                            </div>
                         </div>
                         <div>
                             <InputCustom
@@ -129,11 +108,8 @@ const Register = () => {
                                 label='Password'
                                 value={registerData.password}
                                 setValue={(value) => onChangeRegisterData("password", value)}
+                                error={errorData.password}
                             />
-                            <div className="w-full h-3 text-xs mt-1">
-                                {errorData.password.length > 0
-                                    && <p className="text-red-500">{errorData.password}</p>}
-                            </div>
                         </div>
                         {!!error && <div className="text-xs text-red-500"> {error.message} </div>}
                     </div>

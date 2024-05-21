@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import BottomNavigate from "../../components/BottomNavigate";
 import ButtonText from "../../components/ButtonText"
 import { useAuth } from "../../hooks/useAuth"
@@ -6,10 +7,6 @@ const Profile = () => {
     const { user, signOut } = useAuth();
     const navigate = useNavigate();
 
-    console.log(user?.displayName);
-
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const navigateToLogin = () => {
         navigate("/login");
     }
@@ -44,7 +41,7 @@ const Profile = () => {
                     text="Log out"
                     type="secondary"
                     style="large"
-                    onClick={() => signOut()}
+                    onClick={() => signOut(navigateToLogin)}
                 />
             </div>
             <BottomNavigate />

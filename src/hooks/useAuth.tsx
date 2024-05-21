@@ -38,14 +38,16 @@ export const useAuth = () => {
 
     const signIn = async ({ email, password }: ILoginFormValues) => {
         setIsLoading(true);
+        setError(null);
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
+            const user = result.user;
+            handleUser(user);
             setIsLoading(false);
-            return result;
 
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
             setIsLoading(false);
+            setError(error);
         }
     };
 
@@ -63,14 +65,15 @@ export const useAuth = () => {
         }
     };
 
-    const signOut = async () => {
+    const signOut = async (callback: () => void) => {
         await auth.signOut();
+        callback();
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, handleUser);
         return unsubscribe;
     }, []);
-
+  
     return { user, isLoading, signUp, signIn, signInWithGoogle, signOut, error, setError }
 }

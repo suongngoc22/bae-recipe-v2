@@ -14,7 +14,11 @@ const Login = () => {
         email: '',
         password: ''
     });
-    console.log(user);
+    const [errorData, setErrorData] = useState({
+        email: '',
+        password: ''
+    });
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
 
     const onChangeLoginData = (key: string, value: any) => {
         setError(null);
@@ -22,9 +26,10 @@ const Login = () => {
             ...loginData,
             [key]: value
         })
+        checkValidate(key, value);
     }
 
-    const handleSignIn = () => {
+    const handleSignIn = async () => {
         console.log(loginData);
         signIn(loginData);
     }
@@ -38,13 +43,55 @@ const Login = () => {
         }
     }
 
+    const handleErrorData = (key: string, value: any) => {
+        setErrorData({
+            ...errorData,
+            [key]: value
+        });
+    }
+
+    const checkValidate = (key: string, value: any) => {
+        const inputValue = value;
+
+        if (key === 'email') {
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputValue);
+            handleErrorData("email", isValidEmail ? "" : "Invalid email address");
+        }
+
+        if (key === 'password') {
+            const isValidPassword = inputValue.length >= 8;
+            const isEmptyPassword = inputValue.length <= 0;
+
+            if (isEmptyPassword) {
+                handleErrorData("password", "Please enter your password");
+            } else if (!isValidPassword) {
+                handleErrorData("password", "Password must be at least 8 characters long");
+            } else {
+                handleErrorData("password", "");
+            }
+        }
+    }
+
     useEffect(() => {
         console.log(user);
 
-        if (user) {
+        if (user && !isLoading) {
             navigate("/profile");
         }
-    }, [navigate, user]);
+    }, [user, isLoading]);
+
+    useEffect(() => {
+        if (loginData.email && loginData.password) {
+            if (!errorData.email && !errorData.password) {
+                setIsSignUpDisabled(false);
+            } else {
+                setIsSignUpDisabled(true);
+            }
+
+        } else {
+            setIsSignUpDisabled(true);
+        }
+    }, [loginData, errorData]);
 
     return (
         <>
@@ -59,18 +106,25 @@ const Login = () => {
                     <h1 className="text-[30px] leading-snug font-semibold max-w-[247px] text-primary">Sign In</h1>
 
                     <div className="flex flex-col gap-3">
-                        <InputCustom
-                            type="email"
-                            label='Email'
-                            value={loginData.email}
-                            setValue={(value) => onChangeLoginData("email", value)}
-                        />
-                        <InputCustom
-                            type="password"
-                            label='Password'
-                            value={loginData.password}
-                            setValue={(value) => onChangeLoginData("password", value)}
-                        />
+                        <div>
+                            <InputCustom
+                                type="email"
+                                label='Email'
+                                value={loginData.email}
+                                setValue={(value) => onChangeLoginData("email", value)}
+                                error={errorData.email}
+                            />
+                        </div>
+                        <div>
+                            <InputCustom
+                                type="password"
+                                label='Password'
+                                value={loginData.password}
+                                setValue={(value) => onChangeLoginData("password", value)}
+                                error={errorData.password}
+                            />
+                        </div>
+                        {!!error && <div className="text-xs text-red-500"> {error.message} </div>}
                     </div>
 
                     <div className="flex flex-col justify-center text-sm text-center text-[#A9A9A9] max-w-[350px]">
@@ -88,9 +142,10 @@ const Login = () => {
                     <div className="flex flex-col gap-3 text-center">
                         <ButtonText
                             text="Sign In"
-                            type="primary"
+                            type={isSignUpDisabled ? "secondary" : "primary"}
                             style="large"
                             onClick={() => handleSignIn()}
+                            isDisabled={isSignUpDisabled}
                         />
                         <span className="text-xs text-[#A9A9A9]">or</span>
                         <ButtonText
