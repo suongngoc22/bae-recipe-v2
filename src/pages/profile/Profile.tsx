@@ -7,6 +7,8 @@ const Profile = () => {
     const { user, signOut } = useAuth();
     const navigate = useNavigate();
 
+    console.log(user?.displayName);
+
     const navigateToLogin = () => {
         navigate("/login");
     }
