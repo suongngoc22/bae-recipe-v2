@@ -30,6 +30,16 @@
   /* Color of the scrollbar track */
 }
 
+
+/* Text Style */
 .heading {
   @apply text-2xl font-bold leading-[60px];
+}
+
+.smallText {
+  @apply text-xs
+}
+
+.h5Text {
+  @apply text-lg
 }
