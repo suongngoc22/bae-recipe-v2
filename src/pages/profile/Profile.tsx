@@ -11,6 +11,8 @@ const Profile = () => {
     const [isActive, setIsActive] = useState('recipe');
     const navigate = useNavigate();
 
+    console.log(user?.displayName);
+
     const navigateToLogin = () => {
         navigate("/login");
     }
