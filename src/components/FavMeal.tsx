@@ -4,6 +4,7 @@ import { FiBookmark } from "react-icons/fi"
 import Button from "./Button"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { mealActions } from "../redux/reducers/mealReducer"
+import { MouseEvent } from "react"
 
 interface FavMealProps {
     meal: IMeal;
@@ -15,7 +16,8 @@ const FavMeal = ({ meal }: FavMealProps) => {
     const isFav = favMeals.find(favMeal => favMeal.idMeal === meal?.idMeal);
     const dispatch = useAppDispatch();
 
-    const handleButtonFav = () => {
+    const handleButtonFav = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (!isFav && meal) {
             dispatch(mealActions.addFavMeal(meal));
         } else {
@@ -43,7 +45,7 @@ const FavMeal = ({ meal }: FavMealProps) => {
                             stroke="white"
                             style={{ fill: isFav ? `white` : '' }}
                         />}
-                    onClick={() => handleButtonFav()}
+                    onClick={(e) => handleButtonFav(e)}
                     className="absolute bottom-2 right-8 -translate-y-1/2 w-14 h-14 bg-primary flex items-center justify-center rounded-full                          
                         after:absolute
                         after:content-['']

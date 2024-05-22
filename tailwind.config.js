@@ -19,7 +19,8 @@ export default {
         grey: '#808080',
         lightgray: '#56473F',
         neutral90: '#303030',
-        neutral40: '#A9A9A9'
+        neutral40: '#A9A9A9',
+        neutral20: '#D9D9D9',
       },
       boxShadow: {
         'btnShadow': '0px 5px 35px 5px',
