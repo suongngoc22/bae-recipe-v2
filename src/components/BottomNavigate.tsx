@@ -24,8 +24,12 @@ const BottomNavigate = () => {
 
     return (
         <div className={`w-full flex justify-evenly items-center fixed -bottom-1 bg-white shadow-inner`} style={{ height: bottomNavigatorHeight, maxWidth: layoutMaxWidth }}>
-            {navItems.map(navItem => (
-                <NavItem {...navItem} isActive={location.pathname.startsWith(navItem.url)} />
+            {navItems.map((navItem, index) => (
+                <NavItem
+                    {...navItem}
+                    key={index}
+                    isActive={location.pathname.startsWith(navItem.url)}
+                />
             ))}
         </div>
     )

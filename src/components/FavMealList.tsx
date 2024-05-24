@@ -1,8 +1,13 @@
 import { useAppSelector } from "../redux/hooks"
-import FavMeal from "./FavMeal"
+import FavMeal from "./FavMeal";
+
 
 const FavMealList = () => {
   const favMeals = useAppSelector(state => state.meal.favMeals);
+
+  // call api fetchFavMealsDB
+  // dispatch setFavMeals
+  // get state favMeals from redux store
 
   return (
     <ul className="flex flex-col gap-6 py-3">

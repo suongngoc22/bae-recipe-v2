@@ -32,12 +32,12 @@ export const mealSlice = createSlice({
         addFavMeal: (state, action: PayloadAction<IMeal>) => {
             const newFavMeals = [...state.favMeals, action.payload];
             state.favMeals = newFavMeals;
-            localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
+            // localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
         },
         removeFavMeal: (state, action: PayloadAction<IMeal>) => {
             const newFavMeals = state.favMeals.filter(meal => meal.idMeal !== action.payload.idMeal);
             state.favMeals = newFavMeals;
-            localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
+            // localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
         },
         setMealDetail: (state, action: PayloadAction<IMeal | null>) => {
             state.mealDetail = action.payload
