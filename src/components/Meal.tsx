@@ -6,6 +6,8 @@ import { fetchRandomMeal, mealActions } from "../redux/reducers/mealReducer";
 import { MouseEvent } from "react";
 import Button from "./Button";
 import { FaShuffle } from "react-icons/fa6";
+import { addFavMealDB, removeFavMealDB } from "../api/meal/meal.api";
+import { useAuth } from "../hooks/useAuth";
 
 interface MealProps {
     meal: IMeal;
@@ -15,17 +17,21 @@ interface MealProps {
 
 const Meal = ({ meal, isFav, isRandom }: MealProps) => {
     const dispatch = useAppDispatch();
+    const { user } = useAuth();
 
     const handleButtonFav = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         e.preventDefault();
-
-        if (!isFav) {
-            dispatch(mealActions.addFavMeal(meal));
-        } else {
-            dispatch(mealActions.removeFavMeal(meal));
+        if (user) {
+            if (!isFav && meal) {
+                // call api
+                addFavMealDB(meal, user?.uid);
+                dispatch(mealActions.addFavMeal(meal));
+            } else {
+                removeFavMealDB(meal, user?.uid);
+                dispatch(mealActions.removeFavMeal(meal));
+            }
         }
-
     }
 
     const handleButtonRandom = (e: MouseEvent<HTMLButtonElement>) => {

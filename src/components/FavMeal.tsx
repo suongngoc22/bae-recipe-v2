@@ -5,6 +5,8 @@ import Button from "./Button"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { mealActions } from "../redux/reducers/mealReducer"
 import { MouseEvent } from "react"
+import { addFavMealDB, removeFavMealDB } from "../api/meal/meal.api"
+import { useAuth } from "../hooks/useAuth"
 
 interface FavMealProps {
     meal: IMeal;
@@ -15,13 +17,19 @@ const FavMeal = ({ meal }: FavMealProps) => {
     const favMeals = useAppSelector(state => state.meal.favMeals);
     const isFav = favMeals.find(favMeal => favMeal.idMeal === meal?.idMeal);
     const dispatch = useAppDispatch();
+    const { user } = useAuth();
 
-    const handleButtonFav = (e: MouseEvent<HTMLButtonElement>) => {
+    const handleButtonFav = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (!isFav && meal) {
-            dispatch(mealActions.addFavMeal(meal));
-        } else {
-            meal && dispatch(mealActions.removeFavMeal(meal));
+        if (user) {
+            if (!isFav && meal) {
+                dispatch(mealActions.addFavMeal(meal));
+                // call api
+                addFavMealDB(meal, user?.uid);
+            } else {
+                meal && dispatch(mealActions.removeFavMeal(meal));
+                removeFavMealDB(meal, user?.uid);
+            }
         }
     }
 
