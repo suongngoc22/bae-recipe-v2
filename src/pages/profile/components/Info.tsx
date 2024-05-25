@@ -39,7 +39,7 @@ const InfoItem = ({ label, title }: InfoItemProps) => {
 
 const Info = () => {
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center py-0.5">
             {infoData.map((info, index) => (
                 <InfoItem
                     key={index}

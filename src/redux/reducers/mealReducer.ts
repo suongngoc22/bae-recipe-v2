@@ -1,4 +1,4 @@
-import { getMealBySearch } from './../../api/meal/meal.api';
+import { getFavMealsDB, getMealBySearch } from './../../api/meal/meal.api';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IMeal } from './../../types/define-type';
 import { getMealById, getRandomMeal } from '../../api/meal/meal.api';
@@ -26,18 +26,13 @@ export const mealSlice = createSlice({
         setRandomMeal: (state, action: PayloadAction<IMeal | null>) => {
             state.randomMeal = action.payload
         },
-        setFavMeals: (state, action: PayloadAction<IMeal[]>) => {
-            state.favMeals = action.payload
-        },
         addFavMeal: (state, action: PayloadAction<IMeal>) => {
             const newFavMeals = [...state.favMeals, action.payload];
             state.favMeals = newFavMeals;
-            // localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
         },
         removeFavMeal: (state, action: PayloadAction<IMeal>) => {
             const newFavMeals = state.favMeals.filter(meal => meal.idMeal !== action.payload.idMeal);
             state.favMeals = newFavMeals;
-            // localStorage.setItem("favMeals", JSON.stringify(newFavMeals));
         },
         setMealDetail: (state, action: PayloadAction<IMeal | null>) => {
             state.mealDetail = action.payload
@@ -84,6 +79,18 @@ export const mealSlice = createSlice({
             .addCase(fetchMealBySearch.rejected, (state) => {
                 state.isLoading = false;
             })
+
+            // fetch fav meals by user
+            .addCase(fetchFavMeals.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchFavMeals.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.favMeals = action.payload
+            })
+            .addCase(fetchFavMeals.rejected, (state) => {
+                state.isLoading = false;
+            })
     }
 
 })
@@ -112,6 +119,13 @@ export const fetchMealBySearch = createAsyncThunk("meal/fetchMealBySearch", asyn
     return null;
 })
 
+export const fetchFavMeals = createAsyncThunk("meal/fetchFavMeals", async (userId: string) => {
+    const data = await getFavMealsDB(userId);
+    if (data) {
+        return data;
+    }
+    return null;
+})
 
 export const mealActions = mealSlice.actions
 

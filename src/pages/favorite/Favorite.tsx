@@ -1,18 +1,17 @@
 import BottomNavigate from '../../components/BottomNavigate'
-import ButtonText from '../../components/ButtonText'
 import FavMealList from '../../components/FavMealList'
+import { FavMealTabs } from './components/FavMealTabs'
 
 const Favorite = () => {
     return (
         <div>
-            <div className='p-6'>
-                <h1 className='heading'>Saved recipes</h1>
-                <div className='flex justify-between py-3'>
-                    <ButtonText text='Video' style="small" type='primary' />
-                    <ButtonText text='Recipe' style="small" type='secondary' />
-                </div>
-                <div>
-                    <FavMealList />
+            <div className="mainContent">
+                <div className='flex flex-col gap-4'>
+                    <h1 className='heading'>Saved recipes</h1>
+                    <FavMealTabs />
+                    <div>
+                        <FavMealList />
+                    </div>
                 </div>
             </div>
             <BottomNavigate />

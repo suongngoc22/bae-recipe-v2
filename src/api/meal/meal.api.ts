@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
 import { IMeal } from "../../types/define-type";
 import { db } from "../../firebase/firebase";
 
@@ -39,12 +39,23 @@ export const addFavMealDB = async (newMeal: IMeal, userId: string) => {
     try {
         if (newMeal && userId) {
             const userDocRef = doc(db, "users", userId);
-            await updateDoc(userDocRef, {
-                favMeals: arrayUnion(newMeal)
-            });
-            console.log("Favorite meal added successfully!");
-        }
+            const userDocSnap = await getDoc(userDocRef);
 
+            if (userDocSnap.exists()) {
+                const userData = userDocSnap.data();
+                const favMeals = userData.favMeals || [];
+
+                favMeals.unshift(newMeal);
+
+                await updateDoc(userDocRef, {
+                    favMeals
+                });
+                console.log("Favorite meal added successfully!");
+
+            } else {
+                console.log("No such document!");
+            }
+        }
     } catch (error) {
         console.error("Error adding favorite meal: ", error);
     }
@@ -64,6 +75,20 @@ export const removeFavMealDB = async (newMeal: IMeal, userId: string) => {
     }
 }
 
-export const fetchFavMealsDB = async () => {
+export const getFavMealsDB = async (userId: string) => {
     // call api get favMeals by user
+    try {
+        if (userId) {
+            const userDocRef = doc(db, "users", userId);
+            const data = await getDoc(userDocRef)
+
+            if (data.exists()) {
+                return data.get("favMeals");
+            } else {
+                console.log("No such document!");
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching favorite meals: ", error);
+    }
 }

@@ -23,14 +23,16 @@ const BottomNavigate = () => {
     console.log(location);
 
     return (
-        <div className={`w-full flex justify-evenly items-center fixed -bottom-1 bg-white shadow-inner`} style={{ height: bottomNavigatorHeight, maxWidth: layoutMaxWidth }}>
-            {navItems.map((navItem, index) => (
-                <NavItem
-                    {...navItem}
-                    key={index}
-                    isActive={location.pathname.startsWith(navItem.url)}
-                />
-            ))}
+        <div className={`fixed bottom-0 bg-white shadow-inner w-full`} style={{ maxWidth: layoutMaxWidth }}>
+            <div className="flex justify-evenly items-center w-full" style={{ height: bottomNavigatorHeight }}>
+                {navItems.map((navItem, index) => (
+                    <NavItem
+                        {...navItem}
+                        key={index}
+                        isActive={location.pathname.startsWith(navItem.url)}
+                    />
+                ))}
+            </div>
         </div>
     )
 }
