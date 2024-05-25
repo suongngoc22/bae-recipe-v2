@@ -1,2 +1,2 @@
-export const bottomNavigatorHeight = 70;
+export const bottomNavigatorHeight = 64;
 export const layoutMaxWidth = 430;

@@ -5,6 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --bottom-navigator-height: 4rem;
+}
 
 body {
     background-color: beige;

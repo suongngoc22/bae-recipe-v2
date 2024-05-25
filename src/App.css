@@ -42,3 +42,9 @@
 .h5Text {
   @apply text-lg
 }
+
+/* Main content padding */
+.mainContent {
+  @apply p-6;
+  padding-bottom: calc(var(--bottom-navigator-height) + 2rem);
+}
