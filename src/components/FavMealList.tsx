@@ -21,7 +21,7 @@ const FavMealList = () => {
   return (
     <ul className="flex flex-col gap-6 py-2">
       {
-        favMeals.map((favMeal, index) => {
+        favMeals && favMeals.map((favMeal, index) => {
           return (
             <FavMeal key={index} meal={favMeal} />
           )

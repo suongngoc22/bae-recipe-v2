@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, MouseEvent } from "react"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { fetchMealDetail, mealActions } from "../../redux/reducers/mealReducer"
 import Button from "../../components/Button"
 import { FiBookmark, FiChevronLeft } from "react-icons/fi"
 import SubTitle from "./components/SubTitle"
 import Skeleton from "../../components/Skeleton"
+import { useAuth } from "../../hooks/useAuth"
+import { addFavMealDB, removeFavMealDB } from "../../api/meal/meal.api"
 
 const MealDetail = () => {
     const { id } = useParams();
@@ -15,6 +17,7 @@ const MealDetail = () => {
     const isFav = favMeals.find(favMeal => favMeal.idMeal === meal?.idMeal);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     useEffect(() => {
         if (id) {
@@ -38,11 +41,18 @@ const MealDetail = () => {
         return ingredients;
     }
 
-    const handleButtonFav = () => {
-        if (!isFav && meal) {
-            dispatch(mealActions.addFavMeal(meal));
-        } else {
-            meal && dispatch(mealActions.removeFavMeal(meal));
+    const handleButtonFav = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (user && meal) {
+            if (!isFav) {
+                // call api
+                addFavMealDB(meal, user?.uid);
+                dispatch(mealActions.addFavMeal(meal));
+            } else {
+                removeFavMealDB(meal, user?.uid);
+                dispatch(mealActions.removeFavMeal(meal));
+            }
         }
     }
 
@@ -68,7 +78,7 @@ const MealDetail = () => {
                                     stroke="white"
                                     style={{ fill: isFav ? `white` : '' }}
                                 />}
-                            onClick={() => handleButtonFav()}
+                            onClick={(e) => handleButtonFav(e)}
                             className="absolute bottom-0 right-8 translate-y-1/2 w-14 h-14 bg-primary flex items-center justify-center rounded-full 
                                 
                                     after:absolute

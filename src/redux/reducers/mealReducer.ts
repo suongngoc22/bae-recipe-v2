@@ -124,7 +124,7 @@ export const fetchFavMeals = createAsyncThunk("meal/fetchFavMeals", async (userI
     if (data) {
         return data;
     }
-    return null;
+    return [];
 })
 
 export const mealActions = mealSlice.actions
