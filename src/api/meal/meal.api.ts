@@ -83,9 +83,12 @@ export const getFavMealsDB = async (userId: string) => {
             const data = await getDoc(userDocRef)
 
             if (data.exists()) {
+                console.log(data.get("favMeals"));
                 return data.get("favMeals");
+
             } else {
                 console.log("No such document!");
+                console.log(data);
             }
         }
     } catch (error) {

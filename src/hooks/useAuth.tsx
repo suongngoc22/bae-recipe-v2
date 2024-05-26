@@ -74,6 +74,6 @@ export const useAuth = () => {
         const unsubscribe = onAuthStateChanged(auth, handleUser);
         return unsubscribe;
     }, []);
-  
+
     return { user, isLoading, signUp, signIn, signInWithGoogle, signOut, error, setError }
 }
