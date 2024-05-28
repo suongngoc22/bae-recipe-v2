@@ -13,8 +13,7 @@ const RandomMeal = () => {
     useEffect(() => {
         dispatch(fetchRandomMeal());
 
-
-    }, [dispatch]);
+    }, []);
 
     return (
         isLoading ? <Skeleton

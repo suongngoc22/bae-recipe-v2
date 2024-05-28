@@ -26,11 +26,11 @@ const ButtonText = ({ text, onClick, style, type, icon, className, isDisabled }:
             break;
         case 'small':
             if (type === 'primary') {
-                btnStyles = 'w-full min-w-[117px] bg-primary text-white text-sm font-medium px-4 py-2';
+                btnStyles = 'min-w-[117px] bg-primary text-white text-sm font-medium px-4 py-2';
             } else if (type === 'secondary') {
-                btnStyles = 'w-full min-w-[117px] border border-primary text-primary text-sm font-medium px-4 py-2';
+                btnStyles = 'min-w-[117px] border border-primary text-primary text-sm font-medium px-4 py-2';
             } else {
-                btnStyles = 'w-full min-w-[117px] bg-transparent text-primary text-sm font-medium px-4 py-2';
+                btnStyles = 'min-w-[117px] bg-transparent text-primary text-sm font-medium px-4 py-2';
             }
 
             break;

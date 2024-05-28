@@ -4,6 +4,9 @@ import { FiBookmark } from "react-icons/fi"
 import Button from "./Button"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { mealActions } from "../redux/reducers/mealReducer"
+import { MouseEvent } from "react"
+import { addFavMealDB, removeFavMealDB } from "../api/meal/meal.api"
+import { useAuth } from "../hooks/useAuth"
 
 interface FavMealProps {
     meal: IMeal;
@@ -14,12 +17,19 @@ const FavMeal = ({ meal }: FavMealProps) => {
     const favMeals = useAppSelector(state => state.meal.favMeals);
     const isFav = favMeals.find(favMeal => favMeal.idMeal === meal?.idMeal);
     const dispatch = useAppDispatch();
+    const { user } = useAuth();
 
-    const handleButtonFav = () => {
-        if (!isFav && meal) {
-            dispatch(mealActions.addFavMeal(meal));
-        } else {
-            meal && dispatch(mealActions.removeFavMeal(meal));
+    const handleButtonFav = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        if (user) {
+            if (!isFav && meal) {
+                dispatch(mealActions.addFavMeal(meal));
+                // call api
+                addFavMealDB(meal, user?.uid);
+            } else {
+                meal && dispatch(mealActions.removeFavMeal(meal));
+                removeFavMealDB(meal, user?.uid);
+            }
         }
     }
 
@@ -43,7 +53,7 @@ const FavMeal = ({ meal }: FavMealProps) => {
                             stroke="white"
                             style={{ fill: isFav ? `white` : '' }}
                         />}
-                    onClick={() => handleButtonFav()}
+                    onClick={(e) => handleButtonFav(e)}
                     className="absolute bottom-2 right-8 -translate-y-1/2 w-14 h-14 bg-primary flex items-center justify-center rounded-full                          
                         after:absolute
                         after:content-['']

@@ -8,7 +8,7 @@ import { IoClose } from "react-icons/io5"
 import GoogleIcon from '../../assets/Logo-Google.svg'
 
 const Login = () => {
-    const { user, isLoading, signIn, signInWithGoogle, error } = useAuth();
+    const { user, isLoading, signIn, signInWithGoogle, error, setError } = useAuth();
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
         email: '',
@@ -21,6 +21,7 @@ const Login = () => {
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
 
     const onChangeLoginData = (key: string, value: any) => {
+        setError(null);
         setLoginData({
             ...loginData,
             [key]: value
@@ -155,7 +156,7 @@ const Login = () => {
                             icon={<img src={GoogleIcon} className="w-5 h-5" />}
                         />
 
-                        <span className="text-sm text-[#A9A9A9]">Don’t have an account? <Link to={'/register'} className="font-semibold text-primary">Sign Up</Link></span>
+                        <span className="text-sm text-[#A9A9A9]">Don’t have an account? <Link to={'/register'} className="font-semibold text-primary">Sign up</Link></span>
                     </div>
                 </div >
             </div >

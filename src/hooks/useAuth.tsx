@@ -5,7 +5,7 @@ import { ILoginFormValues } from "../types/define-type";
 import { FirebaseError } from "firebase/app";
 
 export const useAuth = () => {
-    const [user, setUser] = useState<FirebaseUser | ILoginFormValues>();
+    const [user, setUser] = useState<FirebaseUser>();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<FirebaseError | null>(null);
 
@@ -20,16 +20,19 @@ export const useAuth = () => {
 
     const signUp = async ({ email, password }: ILoginFormValues) => {
         setIsLoading(true);
+        setError(null);
         try {
             const result = await createUserWithEmailAndPassword(auth, email, password);
+            const user: FirebaseUser = result.user;
+            handleUser(user);
             setIsLoading(false);
             console.log("đăng ký thành công");
 
             return result;
 
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
             setIsLoading(false);
+            setError(error);
         }
     }
 
@@ -72,5 +75,5 @@ export const useAuth = () => {
         return unsubscribe;
     }, []);
 
-    return { user, isLoading, signUp, signIn, signInWithGoogle, signOut, error }
+    return { user, isLoading, signUp, signIn, signInWithGoogle, signOut, error, setError }
 }
