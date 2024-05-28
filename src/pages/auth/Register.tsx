@@ -58,7 +58,6 @@ const Register = () => {
     }
 
     const handleSignUp = () => {
-        console.log("giá trị đầy đủ, ko lỗi, ok có thể đăng ký");
         signUp(registerData);
     }
 

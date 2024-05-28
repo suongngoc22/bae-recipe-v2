@@ -20,7 +20,6 @@ const navItems = [
 
 const BottomNavigate = () => {
     const location = useLocation();
-    console.log(location);
 
     return (
         <div className={`fixed bottom-0 bg-white shadow-inner w-full`} style={{ maxWidth: layoutMaxWidth }}>

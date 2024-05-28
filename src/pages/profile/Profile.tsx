@@ -5,6 +5,7 @@ import { useAuth } from "../../hooks/useAuth"
 import Info from "./components/Info";
 import FavMealList from "../../components/FavMealList";
 import { FavMealTabs } from "../favorite/components/FavMealTabs";
+import Avatar from '/avatar-user.png';
 
 const Profile = () => {
     const { user, signOut } = useAuth();
@@ -18,7 +19,7 @@ const Profile = () => {
 
     const handleUserAvatar = (user?.photoURL !== undefined && user?.photoURL !== null)
         ? user?.photoURL
-        : 'https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg';
+        : Avatar;
 
     return (
         <div>

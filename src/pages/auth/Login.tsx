@@ -30,7 +30,6 @@ const Login = () => {
     }
 
     const handleSignIn = async () => {
-        console.log(loginData);
         signIn(loginData);
     }
 
