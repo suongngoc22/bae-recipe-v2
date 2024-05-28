@@ -102,8 +102,8 @@ const MealDetail = () => {
                             <SubTitle name='Ingredients' />
                             {getIngredients(meal)?.length &&
                                 <ul>
-                                    {getIngredients(meal).map((ingredient) => (
-                                        <li className="text-lightgray">
+                                    {getIngredients(meal).map((ingredient, index) => (
+                                        <li className="text-lightgray" key={index}>
                                             {ingredient}
                                         </li>
                                     ))}
