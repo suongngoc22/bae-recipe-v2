@@ -24,7 +24,21 @@ export default {
       },
       boxShadow: {
         'btnShadow': '0px 5px 35px 5px',
-      }
+      },
+      keyframes: {
+        'slide-up': {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        'slide-down': {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 0.15s ease-out forwards',
+        'slide-down': 'slide-down 0.15s ease-out forwards',
+      },
 
     },
   },
