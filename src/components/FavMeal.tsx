@@ -40,7 +40,7 @@ const FavMeal = ({ meal }: FavMealProps) => {
                     src={meal?.strMealThumb}
                     alt={meal?.strMeal}
                     loading="lazy"
-                    className="w-full h-[180px] object-fill" />
+                    className="w-full h-[180px] object-cover" />
                 <div
                     className="py-3 px-5 inline-block whitespace-nowrap overflow-hidden text-ellipsis max-w-[250px] text-base font-semibold leading-10 bg-white"
                 >

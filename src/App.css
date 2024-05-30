@@ -36,7 +36,7 @@
 }
 
 .smallText {
-  @apply text-xs
+  @apply text-sm
 }
 
 .h5Text {
